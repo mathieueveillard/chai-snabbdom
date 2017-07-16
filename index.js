@@ -1,4 +1,4 @@
-var toHTML = require('snabbdom-to-html');
+const toHTML = require('snabbdom-to-html');
 
 function assertProperty(actualVNode, expectedVNode, prop) {
   this.assert(
@@ -9,16 +9,6 @@ function assertProperty(actualVNode, expectedVNode, prop) {
     toHTML(actualVNode)
   );
 }
-
-/*function assertVirtualText(actualVNode, expectedVNode) {
-  this.assert(
-    actualVNode.text === expectedVNode.text,
-    'expected\n\n#{act}\n\nto be\n\n#{exp}',
-    'expected\n\n#{act}\n\nto not be\n\n#{exp}',
-    expectedVNode.text,
-    actualVNode.text
-  );
-}*/
 
 function assertVirtualNodeExactly(actualVNode, expectedVNode) {
   this.assert(
@@ -31,10 +21,6 @@ function assertVirtualNodeExactly(actualVNode, expectedVNode) {
 }
 
 function assertVirtualNode(actualVNode, expectedVNode) {
-/*  if (actualVNode.type === 'VirtualText') {
-    assertVirtualText.call(this, actualVNode, expectedVNode);
-    return;
-  }*/
   if (this._exactly) {
     assertVirtualNodeExactly.call(this, actualVNode, expectedVNode);
     return;
@@ -55,9 +41,7 @@ function assertVirtualNode(actualVNode, expectedVNode) {
     toHTML(expectedVNode),
     toHTML(actualVNode)
   );
-  // assertProperty.call(this, actualVNode, expectedVNode, 'id');
-  // assertProperty.call(this, actualVNode, expectedVNode, 'className');
-  for (var i = expectedVNode.children.length - 1; i >= 0; i--) {
+  for (let i = expectedVNode.children.length - 1; i >= 0; i--) {
     assertVirtualNode.call(this,
       actualVNode.children[i],
       expectedVNode.children[i]
@@ -83,7 +67,7 @@ function chaiVirtualDOMPlugin(chai) {
   );
 
   chai.Assertion.addMethod('like', function like(expectedVNode) {
-    var actualVNode = this._obj;
+    const actualVNode = this._obj;
     assertVirtualNode.call(this, actualVNode, expectedVNode);
   });
 }

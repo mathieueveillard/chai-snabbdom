@@ -1,13 +1,13 @@
 /* global describe, it */
-var chai = require('chai');
-var expect = chai.expect;
+const chai = require('chai');
+const expect = chai.expect;
 chai.use(require('../index'));
-var h = require('snabbdom').h;
+const h = require('snabbdom').h;
 
 describe('chai snabbdom plugin', function () {
   describe('look.like()', function () {
     it('should assert vnode looks like itself', function () {
-      var vnode = h('div.widget#foo', {}, [
+      const vnode = h('div.widget#foo', {}, [
         h('h1.header', {}, 'Welcome to our webpage'),
         h('section', {}, [
           h('span.label', {}, 'Your name is...'),
@@ -20,7 +20,7 @@ describe('chai snabbdom plugin', function () {
     });
 
     it('should assert vnode at least like expected', function () {
-      var actualVNode = h('div.widget#foo', {}, [
+      const actualVNode = h('div.widget#foo', {}, [
         h('h1.header', {}, 'Welcome to our webpage'),
         h('section', {}, [
           h('span.label', {}, 'Your name is...'),
@@ -29,11 +29,11 @@ describe('chai snabbdom plugin', function () {
           h('div.something')
         ]),
       ]);
-      var expectedVNode1 = h('div.widget#foo');
-      var expectedVNode2 = h('div.widget#foo', {}, [
+      const expectedVNode1 = h('div.widget#foo');
+      const expectedVNode2 = h('div.widget#foo', {}, [
         h('h1.header')
       ]);
-      var expectedVNode3 = h('div.widget#foo', {}, [
+      const expectedVNode3 = h('div.widget#foo', {}, [
         h('h1.header'),
         h('section', {}, [
           h('span.label'),
@@ -48,7 +48,7 @@ describe('chai snabbdom plugin', function () {
     });
 
     it('should fail if vnode does not exactly match id and className', function () {
-      var actualVNode = h('div.widget#foo', {}, [
+      const actualVNode = h('div.widget#foo', {}, [
         h('h1.header', {}, 'Welcome to our webpage'),
         h('section', {}, [
           h('span.label', {}, 'Your name is...'),
@@ -57,8 +57,8 @@ describe('chai snabbdom plugin', function () {
           h('div.something')
         ]),
       ]);
-      var expectedVNode1 = h('div');
-      var expectedVNode2 = h('div.widget#foo', {}, [
+      const expectedVNode1 = h('div');
+      const expectedVNode2 = h('div.widget#foo', {}, [
         h('h1')
       ]);
       expect(function () {
@@ -70,7 +70,7 @@ describe('chai snabbdom plugin', function () {
 
   describe('look.exactly.like()', function () {
     it('should assert vnode looks exactly like itself', function () {
-      var vnode = h('div.widget#foo', {}, [
+      const vnode = h('div.widget#foo', {}, [
         h('h1.header', {}, 'Welcome to our webpage'),
         h('section', {}, [
           h('span.label', {}, 'Your name is...'),
@@ -83,12 +83,12 @@ describe('chai snabbdom plugin', function () {
     });
 
     it('should assert another vnode looks exactly like itself', function () {
-      var actualVNode = h('ul.list', {}, [
+      const actualVNode = h('ul.list', {}, [
         h('li.item', {}, 'Foo'),
         h('li.item', {}, 'Bar'),
         h('li.item', {}, 'Baz'),
       ]);
-      var expectedVNode = h('ul.list', {}, [
+      const expectedVNode = h('ul.list', {}, [
         h('li.item', {}, 'Foo'),
         h('li.item', {}, 'Bar'),
         h('li.item', {}, 'Baz'),
@@ -97,7 +97,7 @@ describe('chai snabbdom plugin', function () {
     });
 
     it('should fail if actual vnode is has more children than expected', function () {
-      var actualVNode = h('div.widget#foo', {}, [
+      const actualVNode = h('div.widget#foo', {}, [
         h('h1.header', {}, 'Welcome to our webpage'),
         h('section', {}, [
           h('span.label', {}, 'Your name is...'),
@@ -106,11 +106,11 @@ describe('chai snabbdom plugin', function () {
           h('div.something')
         ]),
       ]);
-      var expectedVNode1 = h('div.widget#foo');
-      var expectedVNode2 = h('div.widget#foo', {}, [
+      const expectedVNode1 = h('div.widget#foo');
+      const expectedVNode2 = h('div.widget#foo', {}, [
         h('h1.header')
       ]);
-      var expectedVNode3 = h('div.widget#foo', {}, [
+      const expectedVNode3 = h('div.widget#foo', {}, [
         h('h1.header'),
         h('section', {}, [
           h('span.label'),
@@ -127,7 +127,7 @@ describe('chai snabbdom plugin', function () {
     });
 
     it('should fail if vnode does not exactly match id and className', function () {
-      var actualVNode = h('div.widget#foo', {}, [
+      const actualVNode = h('div.widget#foo', {}, [
         h('h1.header', {}, 'Welcome to our webpage'),
         h('section', {}, [
           h('span.label', {}, 'Your name is...'),
@@ -136,8 +136,8 @@ describe('chai snabbdom plugin', function () {
           h('div.something')
         ]),
       ]);
-      var expectedVNode1 = h('div');
-      var expectedVNode2 = h('div.widget#foo', {}, [
+      const expectedVNode1 = h('div');
+      const expectedVNode2 = h('div.widget#foo', {}, [
         h('h1')
       ]);
       expect(function () {
