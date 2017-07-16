@@ -1,9 +1,11 @@
-# chai-virtual-dom
+# chai-snabbdom
 
-[virtual-dom](https://github.com/Matt-Esch/virtual-dom) assertions for chai. Tests your virtual-dom elements (VirtualNodes, or "VTrees").
+[snabbdom](https://github.com/snabbdom/snabbdom) assertions for chai. Tests your virtual dom elements (vnodes). Snabbdom is the virtual dom implementation chosen to build [Cycle.js](https://cycle.js.org/) [DOM driver](https://github.com/cyclejs/cyclejs/tree/master/dom). Forked from André Staltz's [chai-virtual-dom](https://github.com/staltz/chai-virtual-dom).
 
-[![NPM version](http://img.shields.io/npm/v/chai-virtual-dom.svg?style=flat-square)](https://www.npmjs.org/package/chai-virtual-dom)
-[![Build Status](https://travis-ci.org/staltz/chai-virtual-dom.svg?branch=master)](https://travis-ci.org/staltz/chai-virtual-dom)
+<!--[![NPM version](http://img.shields.io/npm/v/chai-virtual-dom.svg?style=flat-square)](https://www.npmjs.org/package/chai-virtual-dom)
+[![Build Status](https://travis-ci.org/staltz/chai-virtual-dom.svg?branch=master)](https://travis-ci.org/staltz/chai-virtual-dom)-->
+
+<!--
 
 #### Summary
 
@@ -79,7 +81,9 @@ var chai = require('chai');
 chai.use(require('chai-virtual-dom'));
 ```
 
+-->
+
 #### LICENSE
 
-Copyright (c) 2015 Andre Staltz
+Copyright (c) 2017 Mathieu Eveillard, forked from André Staltz's chai-virtual-dom
 Licensed under the MIT license.
