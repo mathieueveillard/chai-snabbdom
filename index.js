@@ -1,64 +1,66 @@
-var toHTML = require('vdom-to-html');
+var toHTML = require('snabbdom-to-html');
 
-function assertProperty(actualVTree, expectedVTree, prop) {
+function assertProperty(actualVNode, expectedVNode, prop) {
   this.assert(
-    actualVTree.properties[prop] === expectedVTree.properties[prop],
+    actualVNode.data.props[prop] === expectedVNode.data.props[prop],
     'expected\n\n#{act}\n\nto have the same ' + prop + ' as\n\n#{exp}',
     'expected\n\n#{act}\n\nto not have the same ' + prop + ' as\n\n#{exp}',
-    toHTML(expectedVTree),
-    toHTML(actualVTree)
+    toHTML(expectedVNode),
+    toHTML(actualVNode)
   );
 }
 
-function assertVirtualText(actualVTree, expectedVTree) {
+/*function assertVirtualText(actualVNode, expectedVNode) {
   this.assert(
-    actualVTree.text === expectedVTree.text,
+    actualVNode.text === expectedVNode.text,
     'expected\n\n#{act}\n\nto be\n\n#{exp}',
     'expected\n\n#{act}\n\nto not be\n\n#{exp}',
-    expectedVTree.text,
-    actualVTree.text
+    expectedVNode.text,
+    actualVNode.text
   );
-}
+}*/
 
-function assertVirtualNodeExactly(actualVTree, expectedVTree) {
+function assertVirtualNodeExactly(actualVNode, expectedVNode) {
   this.assert(
-    toHTML(actualVTree) === toHTML(expectedVTree),
+    toHTML(actualVNode) === toHTML(expectedVNode),
     'expected\n\n#{act}\n\nto look exactly like\n\n#{exp}',
     'expected\n\n#{act}\n\nto not look exactly like\n\n#{exp}',
-    toHTML(expectedVTree),
-    toHTML(actualVTree)
+    toHTML(expectedVNode),
+    toHTML(actualVNode)
   );
 }
 
-function assertVirtualNode(actualVTree, expectedVTree) {
-  if (actualVTree.type === 'VirtualText') {
-    assertVirtualText.call(this, actualVTree, expectedVTree);
+function assertVirtualNode(actualVNode, expectedVNode) {
+/*  if (actualVNode.type === 'VirtualText') {
+    assertVirtualText.call(this, actualVNode, expectedVNode);
     return;
-  }
+  }*/
   if (this._exactly) {
-    assertVirtualNodeExactly.call(this, actualVTree, expectedVTree);
+    assertVirtualNodeExactly.call(this, actualVNode, expectedVNode);
     return;
   }
   this.assert(
-    actualVTree.tagName === expectedVTree.tagName,
-    'expected\n\n#{act}\n\nto have the same tagName as\n\n#{exp}',
-    'expected\n\n#{act}\n\nto not have the same tagName as\n\n#{exp}',
-    toHTML(expectedVTree),
-    toHTML(actualVTree)
+    actualVNode.sel === expectedVNode.sel,
+    'expected\n\n#{act}\n\nto have the same selector (tag name + class and/or id) as\n\n#{exp}',
+    'expected\n\n#{act}\n\nto not have the same selector (tag name + class and/or id) as\n\n#{exp}',
+    toHTML(expectedVNode),
+    toHTML(actualVNode)
   );
+  actualVNode.children = actualVNode.children || [];
+  expectedVNode.children = expectedVNode.children || [];
   this.assert(
-    actualVTree.children.length >= expectedVTree.children.length,
+    actualVNode.children.length >= expectedVNode.children.length,
     'expected\n\n#{act}\n\nto have at least as many children as as\n\n#{exp}',
     'expected\n\n#{act}\n\nto not have as many children as\n\n#{exp}',
-    toHTML(expectedVTree),
-    toHTML(actualVTree)
+    toHTML(expectedVNode),
+    toHTML(actualVNode)
   );
-  assertProperty.call(this, actualVTree, expectedVTree, 'id');
-  assertProperty.call(this, actualVTree, expectedVTree, 'className');
-  for (var i = expectedVTree.children.length - 1; i >= 0; i--) {
+  // assertProperty.call(this, actualVNode, expectedVNode, 'id');
+  // assertProperty.call(this, actualVNode, expectedVNode, 'className');
+  for (var i = expectedVNode.children.length - 1; i >= 0; i--) {
     assertVirtualNode.call(this,
-      actualVTree.children[i],
-      expectedVTree.children[i]
+      actualVNode.children[i],
+      expectedVNode.children[i]
     );
   }
 }
@@ -80,9 +82,9 @@ function chaiVirtualDOMPlugin(chai) {
     }
   );
 
-  chai.Assertion.addMethod('like', function like(expectedVTree) {
-    var actualVTree = this._obj;
-    assertVirtualNode.call(this, actualVTree, expectedVTree);
+  chai.Assertion.addMethod('like', function like(expectedVNode) {
+    var actualVNode = this._obj;
+    assertVirtualNode.call(this, actualVNode, expectedVNode);
   });
 }
 

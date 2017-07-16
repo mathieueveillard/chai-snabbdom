@@ -85,5 +85,4 @@ chai.use(require('chai-virtual-dom'));
 
 #### LICENSE
 
-Copyright (c) 2017 Mathieu Eveillard, forked from André Staltz's chai-virtual-dom
-Licensed under the MIT license.
+Copyright (c) 2017 Mathieu Eveillard. Licensed under the MIT license.
