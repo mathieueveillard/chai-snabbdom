@@ -1,4 +1,3 @@
-/* global describe, it */
 const chai = require('chai');
 const expect = chai.expect;
 chai.use(require('../index'));

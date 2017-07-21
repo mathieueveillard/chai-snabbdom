@@ -18,7 +18,9 @@
     "chai",
     "mocha",
     "test",
-    "vnode"
+    "vnode",
+    "cycle",
+    "time"
   ],
   "author": "Mathieu Eveillard",
   "license": "MIT",
@@ -27,6 +29,7 @@
   },
   "homepage": "https://github.com/mathieueveillard/chai-snabbdom#readme",
   "devDependencies": {
+    "@cycle/time": "^0.8.0",
     "chai": "^4.1.0",
     "mocha": "^3.4.2",
     "snabbdom": "^0.6.9"
